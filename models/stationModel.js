@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const stationSchema = new mongoose.Schema({
-    name: {
+    Name: {
         type: String,
         required: [true, "Station must have a name"],
         unique: true,
