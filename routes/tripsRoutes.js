@@ -5,7 +5,7 @@ const router = express.Router()
 
 router
     .route('/')
-    .get(tripController.getAllTrips)
+    .get(tripController.getAllTripsFromStation)
     .post(tripController.createTrip)
 
 router
