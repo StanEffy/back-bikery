@@ -34,7 +34,7 @@ exports.getAll = (Model) =>
     catchAsync(async (req, res, next) => {
 
         let filter = {};
-        if (req.params.stationId) filter = { tour: req.params.stationId };
+        if (req.params.stationId) filter = { departure_station_id: req.params.stationId };
 
         const features = new APIFeatures(Model.find(filter), req.query)
             .filter()
