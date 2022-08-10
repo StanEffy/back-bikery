@@ -2,7 +2,7 @@
   "name": "back-bikery",
   "version": "1.0.0",
   "description": "backend service written in node, express ",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
