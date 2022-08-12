@@ -5,7 +5,7 @@ dotenv.config({ path: './config.env' });
 
 const app = require('./app');
 
-const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.PASSWORD);
+const DB = process.env.DATABASE.replace('password', process.env.PASSWORD);
 // MongoParseError: options usecreateindex, usefindandmodify are not supported
 mongoose
     .connect(DB, {
@@ -29,7 +29,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 process.on('uncaughtException', (err) => {
-    console.log(err.name, err.message);
+    console.log(err.name, err.message, err);
     server.close(() => {
         process.exit(1);
     });
