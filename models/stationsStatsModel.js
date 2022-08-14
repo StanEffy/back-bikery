@@ -4,16 +4,16 @@ const mongoose = require('mongoose');
 //when have time I fix it and obv forget to delete this comment and edit model as well
 
 const stationsStatsModel = new mongoose.Schema({
-    departure_station_name: String,
-    departure_station_id: Number,
-    departures: Number,
-    mean_distance: Number,
-    median_distance: Number,
-    mean_duration: Number,
-    median_durarion: Number,
-    arrivals: Number
+    departure_station_name: {type: String, required: true},
+    departure_station_id: {type: Number, required: true},
+    departures: {type: Number, required: true},
+    mean_distance:{type: Number, required: false},
+    median_distance: {type: Number, required: true},
+    mean_duration: {type: Number, required: false},
+    median_durarion: {type: Number, required: true},
+    arrivals: {type: Number, required: true},
 })
 
-const StationsStats = mongoose.model('StationsStats', stationsStatsModel)
+const Stats = mongoose.model('Stats', stationsStatsModel)
 
-module.exports = StationsStats
+module.exports = Stats

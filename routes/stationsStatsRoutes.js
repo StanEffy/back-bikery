@@ -1,10 +1,13 @@
-const stationsStatsController = require('../controllers/stationsStatsController')
+const statsController = require('../controllers/stationsStatsController')
 const express = require("express");
 
 const router = express.Router()
 
 router
     .route('/')
-    .get(stationsStatsController.getAllStationsStats)
+    .get(statsController.getAllStationsStats)
+router
+    .route('/:id')
+    .get(statsController.getStationStats)
 
 module.exports = router;
