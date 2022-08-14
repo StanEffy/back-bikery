@@ -5,6 +5,9 @@ dotenv.config({ path: './config.env' });
 
 const app = require('./app');
 
+const PORT = 8080;
+const HOST = '0.0.0.0';
+
 const DB = process.env.DATABASE.replace('password', process.env.PASSWORD);
 // MongoParseError: options usecreateindex, usefindandmodify are not supported
 mongoose
@@ -15,7 +18,8 @@ mongoose
     })
     .then(() => console.log('DB connection successful!'));
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
+
 const server = app.listen(port, () => {
     console.log(`App running on port ${port}...`);
 });
