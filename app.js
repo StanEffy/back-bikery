@@ -9,11 +9,11 @@ const AppError = require('./utils/appError');
 const path = require("path");
 const cors = require('cors')
 
+const bodyParser = require('body-parser');
 
 const app = express();
 
 const corsOptions ={
-    origin:'http://localhost:3000',
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
@@ -27,7 +27,9 @@ const limiter = rateLimit({
 
 app.use(express.static(path.join(__dirname, 'client')));
 
-app.use('/api', limiter);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
+    app.use('/api', limiter);
 
 app.use('/api/v1/trips', tripsRouter);
 app.use('/api/v1/stations', stationsRouter);
