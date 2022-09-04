@@ -5,7 +5,7 @@ dotenv.config({ path: './config.env' });
 
 const app = require('./app');
 
-const PORT = 8080;
+const PORT = 80;
 const HOST = '0.0.0.0';
 
 const DB = process.env.DATABASE.replace('password', process.env.PASSWORD);
