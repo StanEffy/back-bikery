@@ -37,7 +37,7 @@ app.use("/api/v1/trips", tripsRouter);
 app.use("/api/v1/stations", stationsRouter);
 app.use("/api/v1/stats", stationsStatsRouter);
 
-app.all("*", (req, res, next) => {
+app.all("*", (req, _res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
