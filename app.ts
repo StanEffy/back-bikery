@@ -5,7 +5,7 @@ const tripsRouter = require("./routes/tripsRoutes");
 const stationsRouter = require("./routes/stationsRoutes");
 const stationsStatsRouter = require("./routes/stationsStatsRoutes");
 
-const AppError = require("./utils/appError");
+const ApplicationError = require("./utils/appError");
 const path = require("path");
 const cors = require("cors");
 
