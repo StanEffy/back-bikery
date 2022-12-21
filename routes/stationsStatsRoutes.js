@@ -1,13 +1,13 @@
-const statsController = require('../controllers/stationsStatsController')
-const express = require("express");
+import {getAllStationsStats, getStationStats} from '../controllers/stationsStatsController';
+import {Router} from "express";
 
-const router = express.Router()
+const router = Router()
 
 router
     .route('/')
-    .get(statsController.getAllStationsStats)
+    .get(getAllStationsStats)
 router
     .route('/:id')
-    .get(statsController.getStationStats)
+    .get(getStationStats)
 
-module.exports = router;
+export default router;
