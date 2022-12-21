@@ -1,4 +1,4 @@
-const express = require('express')
+import express from "express"
 const stationController = require('../controllers/stationController')
 
 const router = express.Router()
