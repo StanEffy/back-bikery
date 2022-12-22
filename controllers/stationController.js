@@ -1,8 +1,8 @@
-const Station = require('../models/stationModel')
-const factory = require('./handlerFactory')
+import Station from '../models/stationModel';
+import {getAll, getOne, createOne, updateOne, deleteOne} from './handlerFactory';
 
-exports.getAllStations = factory.getAll(Station);
-exports.getStation = factory.getOne(Station);
-exports.createStation = factory.createOne(Station);
-exports.updateStation = factory.updateOne(Station);
-exports.deleteStation = factory.deleteOne(Station);
+export const getAllStations = getAll(Station);
+export const getStation = getOne(Station);
+export const createStation = createOne(Station);
+export const updateStation = updateOne(Station);
+export const deleteStation = deleteOne(Station);

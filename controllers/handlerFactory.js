@@ -1,9 +1,9 @@
-const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/appError');
-const APIFeatures = require('../utils/apiFeatures');
+import catchAsync from '../utils/catchAsync';
+import AppError from '../utils/appError';
+import APIFeatures from '../utils/apiFeatures';
 
-exports.deleteOne = (Model) =>
-    catchAsync(async (req, res, next) => {
+export function deleteOne(Model) {
+    return catchAsync(async (req, res, next) => {
         const doc = await Model.findByIdAndDelete(req.params.id);
 
         if (!doc) {
@@ -15,9 +15,10 @@ exports.deleteOne = (Model) =>
             data: null,
         });
     });
+}
 
-exports.getOne = (Model, popOptions) =>
-    catchAsync(async (req, res, next) => {
+export function getOne(Model, popOptions) {
+    return catchAsync(async (req, res, next) => {
         let query = Model.findById(req.params.id);
         if (popOptions) query = query.populate(popOptions);
         const doc = await query;
@@ -33,12 +34,13 @@ exports.getOne = (Model, popOptions) =>
             },
         });
     });
+}
 
-exports.getAll = (Model) =>
-    catchAsync(async (req, res, next) => {
+export function getAll(Model) {
+    return catchAsync(async (req, res, next) => {
 
         let filter = {};
-        if (req.params.stationId) filter = { departure_station_id: req.params.stationId };
+        if (req.params.stationId) filter = {departure_station_id: req.params.stationId};
 
         const features = new APIFeatures(Model.find(filter), req.query)
             .filter()
@@ -57,8 +59,10 @@ exports.getAll = (Model) =>
             },
         });
     });
-exports.updateOne = (Model) =>
-    catchAsync(async (req, res, next) => {
+}
+
+export function updateOne(Model) {
+    return catchAsync(async (req, res, next) => {
         const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
@@ -75,9 +79,10 @@ exports.updateOne = (Model) =>
             },
         });
     });
+}
 
-exports.createOne = (Model) =>
-    catchAsync(async (req, res, next) => {
+export function createOne(Model) {
+    return catchAsync(async (req, res, next) => {
 
         const doc = await Model.create(req.body);
 
@@ -88,4 +93,4 @@ exports.createOne = (Model) =>
                 data: doc,
             },
         });
-    });
+    });     }
