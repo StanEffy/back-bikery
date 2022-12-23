@@ -1,9 +1,8 @@
-const Trip = require('../models/tripModel')
-const catchAsync = require('../utils/catchAsync')
-const factory = require('./handlerFactory')
+import Trip from '../models/tripModel';
+import {getAll, getOne, createOne, updateOne, deleteOne} from './handlerFactory';
 
-exports.getAllTripsFromStation = factory.getAll(Trip);
-exports.getTrip = factory.getOne(Trip);
-exports.createTrip = factory.createOne(Trip);
-exports.updateTrip = factory.updateOne(Trip);
-exports.deleteTrip = factory.deleteOne(Trip);
+export const getAllTripsFromStation = getAll(Trip);
+export const getTrip = getOne(Trip);
+export const createTrip = createOne(Trip);
+export const updateTrip = updateOne(Trip);
+export const deleteTrip = deleteOne(Trip);
