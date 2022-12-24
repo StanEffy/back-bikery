@@ -3,10 +3,11 @@ import {connect} from 'mongoose';
 
 config({path: './config.env'});
 
-import listen from './app';
+import app from './app';
 
+const mode = process.env.NODE_ENV
 // @ts-ignore
-const DB = process.env.DATABASE.replace('password', process.env.PASSWORD);
+const DB = mode === "production" ? process.env.DATABASE.replace('password', process.env.PASSWORD) : process.env.DATABASE_LOCAL;
 // MongoParseError: options usecreateindex, usefindandmodify are not supported
 connect(DB, {
     // useNewUrlParser: true,
@@ -17,7 +18,7 @@ connect(DB, {
 
 const port = process.env.PORT || 3002;
 
-const server = listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`App running on port ${port}...`);
 });
 

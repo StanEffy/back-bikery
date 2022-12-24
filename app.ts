@@ -5,9 +5,9 @@ import tripsRouter from "./routes/tripsRoutes";
 import stationsRouter from "./routes/stationsRoutes";
 import stationsStatsRouter from "./routes/stationsStatsRoutes";
 
-import ApplicationError from "./utils/appError";
 import path from "path";
 import cors from "cors";
+import AppError from "./utils/appError";
 
 const bodyParser = require("body-parser");
 

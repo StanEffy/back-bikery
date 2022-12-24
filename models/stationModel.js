@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import {Schema, model} from 'mongoose';
 
-const stationSchema = new mongoose.Schema({
+const stationSchema = new Schema({
     Name: {
         type: String,
         required: [true, "Station must have a name"],
@@ -54,7 +54,7 @@ const stationSchema = new mongoose.Schema({
         type: Number,
         required: [true, "without coords it doesnt have any sense"]
     },
-   y: {
+    y: {
         type: Number,
         required: [true, "without coords it doesnt have any sense"]
     },
@@ -63,12 +63,12 @@ const stationSchema = new mongoose.Schema({
         required: false,
         unique: true
     },
-    ID:{
+    ID: {
         type: Number,
         required: false,
         unique: true
     },
 })
-const Station = mongoose.model('Station', stationSchema );
+const Station = model('Station', stationSchema);
 
-module.exports = Station;
+export default Station;

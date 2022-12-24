@@ -1,5 +1,5 @@
-const Stats = require('../models/stationsStatsModel')
-const factory = require('./handlerFactory')
+import Stats from '../models/stationsStatsModel';
+import {getAll, getOne} from './handlerFactory';
 
-exports.getAllStationsStats = factory.getAll(Stats);
-exports.getStationStats = factory.getOne(Stats)
+export const getAllStationsStats = getAll(Stats);
+export const getStationStats = getOne(Stats)
