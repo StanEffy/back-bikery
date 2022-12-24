@@ -5,9 +5,6 @@ config({path: './config.env'});
 
 import listen from './app';
 
-const PORT = 80;
-const HOST = '0.0.0.0';
-
 // @ts-ignore
 const DB = process.env.DATABASE.replace('password', process.env.PASSWORD);
 // MongoParseError: options usecreateindex, usefindandmodify are not supported
