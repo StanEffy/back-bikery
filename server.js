@@ -1,26 +1,26 @@
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
+import {config} from 'dotenv';
+import {connect} from 'mongoose';
 
-dotenv.config({ path: './config.env' });
+config({path: './config.env'});
 
-const app = require('./app');
+import listen from './app';
 
 const PORT = 80;
 const HOST = '0.0.0.0';
 
+// @ts-ignore
 const DB = process.env.DATABASE.replace('password', process.env.PASSWORD);
 // MongoParseError: options usecreateindex, usefindandmodify are not supported
-mongoose
-    .connect(DB, {
-        // useNewUrlParser: true,
-        // useCreateIndex: true,
-        // useFindAndModify: false,
-    })
+connect(DB, {
+    // useNewUrlParser: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+})
     .then(() => console.log('DB connection successful!'));
 
 const port = process.env.PORT || 3002;
 
-const server = app.listen(port, () => {
+const server = listen(port, () => {
     console.log(`App running on port ${port}...`);
 });
 
