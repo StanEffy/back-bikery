@@ -18,4 +18,4 @@ router
         stationController.deleteStation
     );
 
-module.exports = router;
+export default router;

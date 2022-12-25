@@ -1,13 +1,13 @@
-const express = require("express");
-const rateLimit = require("express-rate-limit");
+import express from "express";
+import rateLimit from "express-rate-limit";
 
-const tripsRouter = require("./routes/tripsRoutes");
-const stationsRouter = require("./routes/stationsRoutes");
-const stationsStatsRouter = require("./routes/stationsStatsRoutes");
+import tripsRouter from "./routes/tripsRoutes";
+import stationsRouter from "./routes/stationsRoutes";
+import stationsStatsRouter from "./routes/stationsStatsRoutes";
 
-const ApplicationError = require("./utils/appError");
-const path = require("path");
-const cors = require("cors");
+import path from "path";
+import cors from "cors";
+import AppError from "./utils/appError";
 
 const bodyParser = require("body-parser");
 
@@ -41,4 +41,4 @@ app.all("*", (req, _res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-module.exports = app;
+export default app;
