@@ -1,9 +1,10 @@
 import {Schema, model} from 'mongoose';
+import {IStationStats} from "./types";
 
 //there is a spelling mistake in db
 //when have time I fix it and obv forget to delete this comment and edit model as well
 
-const stationsStatsModel = new Schema({
+const stationsStatsModel = new Schema<IStationStats>({
     departure_station_name: {type: String, required: true},
     departure_station_id: {type: Number, required: true},
     departures: {type: Number, required: true},

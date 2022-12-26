@@ -1,8 +1,9 @@
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/appError';
 import APIFeatures from '../utils/apiFeatures';
+import {IStation, IStationStats, ITrip} from "../models/types";
 
-export function deleteOne(Model) {
+export function deleteOne(Model: ITrip | IStation | IStationStats) {
     return catchAsync(async (req, res, next) => {
         const doc = await Model.findByIdAndDelete(req.params.id);
 
@@ -17,7 +18,7 @@ export function deleteOne(Model) {
     });
 }
 
-export function getOne(Model, popOptions) {
+export function getOne(Model, popOptions: never | undefined) {
     return catchAsync(async (req, res, next) => {
         let query = Model.findById(req.params.id);
         if (popOptions) query = query.populate(popOptions);

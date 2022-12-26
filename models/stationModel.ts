@@ -1,6 +1,7 @@
 import {Schema, model} from 'mongoose';
+import {IStation} from "./types";
 
-const stationSchema = new Schema({
+const stationSchema = new Schema<IStation>({
     Name: {
         type: String,
         required: [true, "Station must have a name"],

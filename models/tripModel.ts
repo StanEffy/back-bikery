@@ -1,6 +1,7 @@
 import {Schema, model} from 'mongoose';
+import {ITrip} from "./types";
 
-const tripSchema = new Schema({
+const tripSchema = new Schema<ITrip>({
     departure: {type: String, required: true},
     return: {type: String, required: true},
     departure_station_id: {type: Number, required: true},
