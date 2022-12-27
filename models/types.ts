@@ -34,5 +34,6 @@ export interface ITrip {
     return_station_name: string,
     covered_distance_m: number,
     duration_sec:number,
-    ID: number
+    ID: number,
+    FID: number,
 }
