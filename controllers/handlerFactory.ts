@@ -2,9 +2,11 @@ import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/appError';
 import APIFeatures from '../utils/apiFeatures';
 import {IStation, IStationStats, ITrip} from "../models/types";
+import { Model } from 'mongoose';
+import {NextFunction, Request, Response} from "express";
 
-export function deleteOne(Model: ITrip | IStation | IStationStats) {
-    return catchAsync(async (req, res, next) => {
+export function deleteOne(Model: Model<ITrip> | Model<IStation>) {
+    return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         const doc = await Model.findByIdAndDelete(req.params.id);
 
         if (!doc) {
@@ -19,7 +21,7 @@ export function deleteOne(Model: ITrip | IStation | IStationStats) {
 }
 
 export function getOne(Model, popOptions: never | undefined) {
-    return catchAsync(async (req, res, next) => {
+    return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         let query = Model.findById(req.params.id);
         if (popOptions) query = query.populate(popOptions);
         const doc = await query;
@@ -37,8 +39,8 @@ export function getOne(Model, popOptions: never | undefined) {
     });
 }
 
-export function getAll(Model) {
-    return catchAsync(async (req, res, next) => {
+export function getAll(Model: Model<ITrip> | Model<IStation> | Model<IStationStats>) {
+    return catchAsync(async (req: Request, res: Response, _next: NextFunction) => {
 
         let filter = {};
         if (req.params.stationId) filter = {departure_station_id: req.params.stationId};
@@ -62,8 +64,8 @@ export function getAll(Model) {
     });
 }
 
-export function updateOne(Model) {
-    return catchAsync(async (req, res, next) => {
+export function updateOne(Model: Model<ITrip> | Model<IStation>) {
+    return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
         const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
@@ -82,8 +84,8 @@ export function updateOne(Model) {
     });
 }
 
-export function createOne(Model) {
-    return catchAsync(async (req, res, next) => {
+export function createOne(Model: Model<ITrip> | Model<IStation>) {
+    return catchAsync(async (req: Request, res: Response, _next: NextFunction) => {
 
         const doc = await Model.create(req.body);
 
