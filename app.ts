@@ -20,7 +20,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// @ts-ignore
 const limiter = rateLimit({
   max: 600,
   windowMs: 60 * 60 * 1000,
