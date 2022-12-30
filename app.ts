@@ -14,7 +14,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const corsOptions = {
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
 
