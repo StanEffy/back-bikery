@@ -5,9 +5,9 @@ config({path: './config.env'});
 
 import app from './app';
 
-const mode = process.env.NODE_ENV
+const mode = process.env.NODE_ENV || "";
 // @ts-ignore
-const DB = mode === "production" ? process.env.DATABASE.replace('password', process.env.PASSWORD) : process.env.DATABASE_LOCAL;
+const DB = mode === "production" ? process.env.DATABASE.replace('password', process.env.PASSWORD) : "mongodb://localhost:27017/bikery";
 // MongoParseError: options usecreateindex, usefindandmodify are not supported
 connect(DB, {
     // useNewUrlParser: true,
@@ -24,7 +24,8 @@ const server = app.listen(port, () => {
 
 process.on('unhandledRejection', (err) => {
     console.log('UNHANDLED REJECTION! 💥 Shutting down...');
-    console.log(err.name, err.message);
+    console.log(err)
+    // console.log(err?.name, err?.message);
     server.close(() => {
         process.exit(1);
     });

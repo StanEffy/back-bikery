@@ -20,9 +20,10 @@ export function deleteOne(Model: Model<ITrip> | Model<IStation>) {
     });
 }
 
-export function getOne(Model: Model<ITrip> | Model<IStation>, popOptions: never | undefined) {
+export function getOne(Model: Model<ITrip> | Model<IStation>, popOptions?: unknown | undefined) {
     return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-        let query = Model.findById(req.params.id);
+        let reqId:string = req.params.id
+        let query = Model.findById(reqId);
         if (popOptions) query = query.populate(popOptions);
         const doc = await query;
 
