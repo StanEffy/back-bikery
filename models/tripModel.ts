@@ -11,6 +11,6 @@ const tripSchema = new Schema<ITrip>({
     covered_distance_m: {type: Number, required: true},
     duration_sec: {type: Number, required: true}
 })
-const Trip = model('Trip', tripSchema);
+const Trip = model('Trip', tripSchema, "trips");
 
 export default Trip;

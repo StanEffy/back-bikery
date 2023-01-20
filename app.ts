@@ -13,9 +13,19 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+//Whitelist for localhost cors request
+const whitelist = ['http://localhost:3000', 'http://localhost:8080'];
+
 const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
+  origin: function (origin: any, callback: any) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  }
 };
 
 app.use(cors(corsOptions));
@@ -28,7 +38,7 @@ const limiter = rateLimit({
 
 app.use(express.static(path.join(__dirname, "client")));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/api", limiter);
 

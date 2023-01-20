@@ -43,7 +43,7 @@ export function getOne(Model, popOptions = {}) {
 
 export function getAll(Model) {
     return catchAsync(async (req, res, next) => {
-
+        console.log(Model)
         let filter = {};
         if (req.params.stationId) filter = {departure_station_id: req.params.stationId};
 
@@ -54,7 +54,9 @@ export function getAll(Model) {
             .paginate();
         // const doc = await features.query.explain();
         const doc = await features.query;
-
+        console.log("req params are ")
+        console.log(req.params)
+        
         // SEND RESPONSE
         res.status(200).json({
             status: 'success',
