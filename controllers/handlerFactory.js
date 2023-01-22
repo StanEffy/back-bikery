@@ -2,6 +2,7 @@
 import catchAsync from '../utils/catchAsync';
 import AppError from '../utils/appError';
 import APIFeatures from '../utils/apiFeatures';
+import Station from "../models/stationModel";
 export function deleteOne(Model) {
     return catchAsync(async (req, res, next) => {
         const doc = await Model.findByIdAndDelete(req.params.id);
@@ -43,7 +44,7 @@ export function getOne(Model, popOptions = {}) {
 
 export function getAll(Model) {
     return catchAsync(async (req, res, next) => {
-        console.log(Model)
+
         let filter = {};
         if (req.params.stationId) filter = {departure_station_id: req.params.stationId};
 
@@ -56,8 +57,20 @@ export function getAll(Model) {
         const doc = await features.query;
         console.log("req params are ")
         console.log(req.params)
-        
-        // SEND RESPONSE
+        let statsObject = {}
+
+        if (req.params.stationId) {
+
+            const allResDeparture = new APIFeatures(Model.find({departure_station_id: req.params.stationId}), "")
+            const mostDeparture = await allResDeparture.query;
+
+
+
+            const allResArrival= new APIFeatures(Model.find({return_station_id: req.params.stationId}), "")
+            const mostArrivals = await allResArrival.query;
+        }
+
+            // SEND RESPONSE
         res.status(200).json({
             status: 'success',
             results: doc.length,
