@@ -37,3 +37,11 @@ export interface ITrip {
     ID: number,
     FID: number,
 }
+
+export interface IStationToStation {
+    station_id: number,
+    stats: {
+        stations_of_return: object
+        stations_of_arrival: object
+    }
+}
