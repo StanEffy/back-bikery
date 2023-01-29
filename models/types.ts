@@ -40,8 +40,6 @@ export interface ITrip {
 
 export interface IStationToStation {
     station_id: number,
-    stats: {
-        stations_of_return: object
-        stations_of_arrival: object
-    }
+    stations_of_return: object
+    stations_of_arrival: object
 }
