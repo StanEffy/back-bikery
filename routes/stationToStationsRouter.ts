@@ -1,4 +1,4 @@
-import express from "express"
+import express from "express";
 const stationController = require('../controllers/stationToStationController')
 
 const router = express.Router()
@@ -6,7 +6,7 @@ const router = express.Router()
 router
     .route('/')
     .get(stationController.getAllStationToStation)
-    .post(stationController.createStation)
+    .post(stationController.createStationToStation)
 
 router
     .route('/:id')
