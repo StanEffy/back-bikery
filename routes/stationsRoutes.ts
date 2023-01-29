@@ -18,4 +18,10 @@ router
         stationController.deleteStation
     );
 
+//TEMPORARY
+
+router
+    .route('/stats')
+    .get(stationController.getStationStats);
+
 export default router;
