@@ -1,4 +1,3 @@
-import Station from '../models/stationModel';
 import {getAll, getOne, createOne, updateOne, deleteOne} from './handlerFactory';
 import StationToStation from "../models/stationToStationTrips";
 
