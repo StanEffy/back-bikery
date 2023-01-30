@@ -3,7 +3,7 @@ import {IStationToStation} from "./types";
 
 const stationToStationSchema = new Schema<IStationToStation>({
     station_id: {
-        type: Number
+        type: String
     },
     stations_of_return: {
             type: Object,

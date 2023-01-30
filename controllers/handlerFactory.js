@@ -23,12 +23,38 @@ export function deleteOne(Model) {
  * @param {{ findById: (arg0: string) => any; }} Model
  * @param {any} popOptions
  */
-export function getOne(Model, popOptions = {}) {
-    console.log("WE ARE HERE")
-    console.log(Model)
+export function getOne(Model, popOptions = "") {
     return catchAsync(async (req, res, next) => {
-        let reqId= req.params.id
-        let query = Model.findById(reqId);
+        let reqId = req.params.id;
+        let station_id = req.params.station_id
+
+        let query;
+
+        if(reqId) query = Model.findById(reqId);
+
+        if(station_id) {
+            console.log("We are inside")
+           const features = new APIFeatures(Model.find({station_id: station_id}), "")
+                .filter()
+                .sort()
+                .limitFields()
+                .paginate();
+
+            const doc = await features.query;
+
+            if (!doc) {
+                return next(new AppError('No document found with that ID', 404));
+            }
+
+            res.status(200).json({
+                status: 'success',
+                data: {
+                    data: doc,
+                },
+            });
+        }
+
+
         if (popOptions) query = query.populate(popOptions);
         const doc = await query;
 
@@ -58,35 +84,35 @@ export function getAll(Model) {
         // const doc = await features.query.explain();
         const doc = await features.query;
 
-        const arrayOfStationValues = req.originalUrl.slice(req.originalUrl.indexOf("/?")).split("&").filter(str => str.indexOf("station") > -1).map(str => str.slice(str.indexOf("=")+1))
-        let statsObject = {}
-
-        if (arrayOfStationValues.length) {
-
-            const allResDeparture = new APIFeatures(Model.find({departure_station_id: arrayOfStationValues[0]}), "")
-            const mostDeparture = await allResDeparture.query;
-
-            let returnsObj = searchTopStations(mostDeparture, stationType.departure)
-            let returnsArr = []
-            for (let key in returnsObj) {
-                returnsArr.push([key, returnsObj[key]])
-            }
-
-            //as it is a tuple second element is always
-            statsObject.returns = returnsArr.sort((a, b) => b[1] - a[1]).slice(0, 5)
-
-            const allResArrival= new APIFeatures(Model.find({return_station_id: arrayOfStationValues[0]}), "")
-            const mostArrivals = await allResArrival.query;
-
-            let departuresObj = searchTopStations(mostArrivals, stationType.return)
-            let departuresArr = []
-            for (let key in departuresObj) {
-                departuresArr.push([key, departuresObj[key]])
-            }
-
-            //as it is a tuple second element is always
-            statsObject.departures = departuresArr.sort((a, b) => b[1] - a[1]).slice(0, 5)
-        }
+        // const arrayOfStationValues = req.originalUrl.slice(req.originalUrl.indexOf("/?")).split("&").filter(str => str.indexOf("station") > -1).map(str => str.slice(str.indexOf("=")+1))
+        // let statsObject = {}
+        //
+        // if (arrayOfStationValues.length) {
+        //
+        //     const allResDeparture = new APIFeatures(Model.find({departure_station_id: arrayOfStationValues[0]}), "")
+        //     const mostDeparture = await allResDeparture.query;
+        //
+        //     let returnsObj = searchTopStations(mostDeparture, stationType.departure)
+        //     let returnsArr = []
+        //     for (let key in returnsObj) {
+        //         returnsArr.push([key, returnsObj[key]])
+        //     }
+        //
+        //     //as it is a tuple second element is always
+        //     statsObject.returns = returnsArr.sort((a, b) => b[1] - a[1]).slice(0, 5)
+        //
+        //     const allResArrival= new APIFeatures(Model.find({return_station_id: arrayOfStationValues[0]}), "")
+        //     const mostArrivals = await allResArrival.query;
+        //
+        //     let departuresObj = searchTopStations(mostArrivals, stationType.return)
+        //     let departuresArr = []
+        //     for (let key in departuresObj) {
+        //         departuresArr.push([key, departuresObj[key]])
+        //     }
+        //
+        //     //as it is a tuple second element is always
+        //     statsObject.departures = departuresArr.sort((a, b) => b[1] - a[1]).slice(0, 5)
+        // }
 
             // SEND RESPONSE
         res.status(200).json({
@@ -94,7 +120,7 @@ export function getAll(Model) {
             results: doc.length,
             data: {
                 data: doc,
-                stats: statsObject
+                // stats: statsObject
             },
         });
     });
