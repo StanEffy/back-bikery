@@ -39,7 +39,7 @@ export interface ITrip {
 }
 
 export interface IStationToStation {
-    station_id: number,
+    station_id: string,
     stations_of_return: object
     stations_of_arrival: object
 }

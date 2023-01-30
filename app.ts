@@ -4,6 +4,7 @@ import rateLimit from "express-rate-limit";
 import tripsRouter from "./routes/tripsRoutes";
 import stationsRouter from "./routes/stationsRoutes";
 import stationsStatsRouter from "./routes/stationsStatsRoutes";
+import stationToStationsRouter from "./routes/stationToStationsRouter";
 
 import path from "path";
 import cors from "cors";
@@ -45,6 +46,7 @@ app.use("/api", limiter);
 app.use("/api/v1/trips", tripsRouter);
 app.use("/api/v1/stations", stationsRouter);
 app.use("/api/v1/stats", stationsStatsRouter);
+app.use("/api/v1/stationToStation", stationToStationsRouter);
 
 app.all("*", (req, _res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
