@@ -74,7 +74,14 @@ export function getOne(Model, popOptions = "") {
 export function getAll(Model) {
     return catchAsync(async (req, res, next) => {
         let filter = {};
-        if (req.params.stationId) filter = {departure_station_id: req.params.stationId};
+        if (req.params.stationId) filter = {
+            $and: [
+                { $or: [{departure_station_id: req.params.stationId}, { return_station_id: req.params.stationId}]},
+                { $or: [{ departure_station_id: req.params.stationId, return_station_id: req.params.stationId }]}
+            ]
+        };
+
+
 
         const features = new APIFeatures(Model.find(filter), req.query)
             .filter()
