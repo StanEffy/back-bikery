@@ -84,37 +84,6 @@ export function getAll(Model) {
         // const doc = await features.query.explain();
         const doc = await features.query;
 
-        // const arrayOfStationValues = req.originalUrl.slice(req.originalUrl.indexOf("/?")).split("&").filter(str => str.indexOf("station") > -1).map(str => str.slice(str.indexOf("=")+1))
-        // let statsObject = {}
-        //
-        // if (arrayOfStationValues.length) {
-        //
-        //     const allResDeparture = new APIFeatures(Model.find({departure_station_id: arrayOfStationValues[0]}), "")
-        //     const mostDeparture = await allResDeparture.query;
-        //
-        //     let returnsObj = searchTopStations(mostDeparture, stationType.departure)
-        //     let returnsArr = []
-        //     for (let key in returnsObj) {
-        //         returnsArr.push([key, returnsObj[key]])
-        //     }
-        //
-        //     //as it is a tuple second element is always
-        //     statsObject.returns = returnsArr.sort((a, b) => b[1] - a[1]).slice(0, 5)
-        //
-        //     const allResArrival= new APIFeatures(Model.find({return_station_id: arrayOfStationValues[0]}), "")
-        //     const mostArrivals = await allResArrival.query;
-        //
-        //     let departuresObj = searchTopStations(mostArrivals, stationType.return)
-        //     let departuresArr = []
-        //     for (let key in departuresObj) {
-        //         departuresArr.push([key, departuresObj[key]])
-        //     }
-        //
-        //     //as it is a tuple second element is always
-        //     statsObject.departures = departuresArr.sort((a, b) => b[1] - a[1]).slice(0, 5)
-        // }
-
-            // SEND RESPONSE
         res.status(200).json({
             status: 'success',
             results: doc.length,
@@ -150,7 +119,6 @@ export function createOne(Model) {
     return catchAsync(async (req, res, next) => {
 
         const doc = await Model.create(req.body);
-
 
         res.status(201).json({
             status: 'success',
