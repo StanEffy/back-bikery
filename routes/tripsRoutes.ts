@@ -9,6 +9,10 @@ router
     .post(createTrip)
 
 router
+    .route('/allTrips/:stationId')
+    .get(getAllTripsFromStation)
+
+router
     .route('/:id')
     .get(getTrip)
     .patch(
