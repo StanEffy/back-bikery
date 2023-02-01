@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {getAllTripsFromStation, createTrip, getTrip, updateTrip, deleteTrip} from '../controllers/tripController';
+import {getAllTripsFromStation, createTrip, getTrip} from '../controllers/tripController';
 
 const router = Router()
 
@@ -15,11 +15,5 @@ router
 router
     .route('/:id')
     .get(getTrip)
-    .patch(
-        updateTrip
-    )
-    .delete(
-        deleteTrip
-    );
 
 export default router;

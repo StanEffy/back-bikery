@@ -14,7 +14,4 @@ router
     .patch(
         stationToStationController.updateStationToStation
     )
-    .delete(
-        stationToStationController.deleteStationToStation
-    );
 export default router;
