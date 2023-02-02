@@ -1,10 +1,43 @@
 # back-bikery
 backend service for bikery app
 
+# Environment vars
+This project uses the following environment variables:
+
+| Name     | Description                       | Default Value |
+|----------|-----------------------------------|---------------|
+| CORS     | Cors accepted values              | "*"           |
+| NODE_ENV | Environment of the app            | production    |
+| PORT     | Port on which server is listening | 3002          |
+
+# Pre-requisites
+- Install [Node.js](https://nodejs.org/en/) version 16.0.0+
+
+
 ## What can we get from here?
 
 Backend consists of couple different endpoints which can give you informations about stations, trips between them and some detailed statistics. 
 Statistics part implemented partially: the idea is to update it every time user add a new trip. First solution was to count it every request, but it caused nothing but pain.
+
+## Project Structure
+The folder structure of this app is explained below:
+
+| Name              | Description                                                                                      |
+|-------------------|--------------------------------------------------------------------------------------------------|
+| **client**        | Contains the client-side for the app                                                             |
+| **node_modules**  | Contains all  npm dependencies                                                                   |
+| **controllers**   | Controllers to handle CRUD operations for different routes                                       |
+| **models**        | Contains mongoose models                                                                         |
+| **routes**        | Routes of an app                                                                                 |
+| **utils**         | Common libraries to be used across your app.                                                     |
+| **.dockerignore** | Containts info skippable by Docker                                                               |
+| **.gitignore**    | Quite common template of files and folders to be ignored by git                                  |
+| **config.env**    | Config file which doesn't exist on the repo, but only locally                                    |
+| **.**/app.ts      | Preconfig of an app                                                                              |
+| **.**/server.ts   | Entry point to express app                                                                       |
+| package.json      | Contains npm dependencies as well as [build scripts](#what-if-a-library-isnt-on-definitelytyped) | 
+| tsconfig.json     | Config settings for compiling source code only written in TypeScript                             |
+| tslint.json       | Config settings for TSLint code style checking                                                   |
 
 ### Endpoints
 
