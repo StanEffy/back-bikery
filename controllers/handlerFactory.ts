@@ -2,13 +2,13 @@ import catchAsync from "../utils/catchAsync"
 import AppError from "../utils/appError"
 import APIFeatures from "../utils/apiFeatures"
 import {Model} from "mongoose"
-import {IStation, ITrip} from "../models/types"
+import {IStation, IStationToStation, ITrip} from "../models/types"
 
 type ModelTripOrStation = Model<IStation> | Model<ITrip>;
 
 // type TModelAll = Model<IStation> | Model<ITrip> | Model<IStationToStation> | Model<IStationStats>
 
-export function deleteOne(Model: ModelTripOrStation) {
+export function deleteOne(Model: ModelTripOrStation | Model<IStationToStation>) {
 	return catchAsync(async (req, res, next) => {
 		const doc = await Model.findByIdAndDelete(req.params.id)
 
