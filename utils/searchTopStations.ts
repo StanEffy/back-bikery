@@ -5,8 +5,14 @@ export enum stationType {
     "return"
 }
 
-const searchTopStations = (arrayOfTrips: ITrip[], mainStationType: stationType) => {
-	const res = {}
+type ResultObject = {
+	[key: string]: number
+}
+
+
+//You are not being able to know all the stations keys because they can be added by user/admin
+const searchTopStations = (arrayOfTrips: ITrip[], mainStationType: stationType): ResultObject => {
+	const res: ResultObject = {}
 	arrayOfTrips.forEach((trip: ITrip) => {
 		switch (mainStationType) {
 		case stationType.departure:
