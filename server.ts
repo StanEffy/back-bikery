@@ -7,7 +7,9 @@ import app from "./app"
 
 const mode = process.env.NODE_ENV || ""
 
-const DB = mode === "production" ? process?.env?.DATABASE.replace("password", process?.env?.PASSWORD) : "mongodb://127.0.0.1:27017/bikery?directConnection=true"
+const db_string: string = process.env.DATABASE as string
+
+const DB = mode === "production" ? db_string.replace("password", process.env.PASSWORD as string) : "mongodb://127.0.0.1:27017/bikery?directConnection=true"
 
 connect(DB, {
 	// useNewUrlParser: true,
