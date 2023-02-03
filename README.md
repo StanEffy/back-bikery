@@ -37,7 +37,7 @@ The folder structure of this app is explained below:
 | **.**/server.ts   | Entry point to express app                                                                       |
 | package.json      | Contains npm dependencies as well as [build scripts](#what-if-a-library-isnt-on-definitelytyped) | 
 | tsconfig.json     | Config settings for compiling source code only written in TypeScript                             |
-| tslint.json       | Config settings for TSLint code style checking                                                   |
+| .eslintrc.json    | Config settings for TSLint/ESLint code style checking                                            |
 
 ### Endpoints
 
@@ -96,13 +96,26 @@ npm start
 ## How to test
 npm run test
 
-or you can build a Docker container based on the Dockerfile. It works locally, but I am currently struggling with uploading it to aws ECS
-
 ## Tech used
-Mongo with mongoose and express, cause it is still one of the most used solution on the internet. 
+Mongo with express. It is rather a too classical stack which becomes obsolete, but it will definitely stay for a while.
 
 ## TO DO
-- Create a serverless implementation of the backend
-- Rewrite types more thoroughly
+- The most crucial priority is to create elaborate filtering (e.g. 3 different stations to one) and sending it to the server as a json and pagination, cause responses are quite slow for now. 
+I should learn about user behaviour and some kind of lazy loading of some bigger bits of data.
+- Create a function to update station stats on new trips added to the db
+- Create a serverless implementation of the backend, because day to day it becomes a thing more and more.
+- Rewrite types thoroughly
 - Decompose the code to make it easier to be tested
 - Create different variants for DB-solution (just to train on)
+- Refactoring of the code
+- Create documentation with swagger
+- Cover it with Postman
+- Make registration and admin role to restrict all the addings to the DB by commoners. 
+
+## Disadvantages of current implementation
+
+1) Not the whole task was implemented (user is not able to go through all the trips)
+2) Сould have been tested better
+3) Typescript usage is not elegant enough and complete
+4) Some part of db are nailed (like most popular stations stats) and can't be updated yet, but dynamic solution (count all the trips in/out on the request) is actually awful and take too much type
+5) Errors send from mistake should be more clear 
