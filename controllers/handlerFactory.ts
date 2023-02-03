@@ -126,4 +126,5 @@ export function createOne(Model) {
                 data: doc,
             },
         });
-    });     }
+    });
+}
