@@ -1,18 +1,23 @@
 import express from "express"
-const stationController = require('../controllers/stationController')
+import {
+	createStation,
+	getAllStations,
+	getStation,
+	updateStation
+} from "../controllers/stationController"
 
 const router = express.Router()
+ 
+router
+	.route("/")
+	.get(getAllStations)
+	.post(createStation)
 
 router
-    .route('/')
-    .get(stationController.getAllStations)
-    .post(stationController.createStation)
+	.route("/:id")
+	.get(getStation)
+	.patch(
+		updateStation
+	)
 
-router
-    .route('/:id')
-    .get(stationController.getStation)
-    .patch(
-        stationController.updateStation
-    )
-
-export default router;
+export default router

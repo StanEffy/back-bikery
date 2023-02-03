@@ -1,17 +1,22 @@
-import express from "express";
-const stationToStationController = require('../controllers/stationToStationController')
+import express from "express"
+import {
+	createStationToStation,
+	getAllStationToStation,
+	getOneStationToStations,
+	updateStationToStation
+} from "../controllers/stationToStationController"
 
 const router = express.Router()
+ 
+router
+	.route("/")
+	.get(getAllStationToStation)
+	.post(createStationToStation)
 
 router
-    .route('/')
-    .get(stationToStationController.getAllStationToStation)
-    .post(stationToStationController.createStationToStation)
-
-router
-    .route('/:station_id')
-    .get(stationToStationController.getOneStationToStations)
-    .patch(
-        stationToStationController.updateStationToStation
-    )
-export default router;
+	.route("/:station_id")
+	.get(getOneStationToStations)
+	.patch(
+		updateStationToStation
+	)
+export default router

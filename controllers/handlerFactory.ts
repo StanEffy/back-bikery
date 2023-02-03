@@ -2,12 +2,13 @@ import catchAsync from "../utils/catchAsync"
 import AppError from "../utils/appError"
 import APIFeatures from "../utils/apiFeatures"
 import {Model} from "mongoose"
-import {IStation, IStationStats, IStationToStation, ITrip} from "../models/types"
+import {IStation, IStationToStation, ITrip} from "../models/types"
 
-type ModelTripOrStation = Model<IStation> | Model<ITrip>
-type ModelAll = Model<IStation> | Model<ITrip> | Model<IStationToStation> | Model<IStationStats>
+type ModelTripOrStation = Model<IStation> | Model<ITrip>;
 
-export function deleteOne(Model: ModelTripOrStation) {
+// type TModelAll = Model<IStation> | Model<ITrip> | Model<IStationToStation> | Model<IStationStats>
+
+export function deleteOne(Model: ModelTripOrStation | Model<IStationToStation>) {
 	return catchAsync(async (req, res, next) => {
 		const doc = await Model.findByIdAndDelete(req.params.id)
 
@@ -26,7 +27,7 @@ export function deleteOne(Model: ModelTripOrStation) {
  * @param {{ findById: (arg0: string) => any; }} Model
  * @param {any} popOptions
  */
-export function getOne(Model:ModelTripOrStation, popOptions = "") {
+export function getOne(Model:Model<any>, popOptions = "") {
 	return catchAsync(async (req, res, next) => {
 		const reqId = req.params.id
 		const station_id = req.params.station_id
@@ -58,7 +59,7 @@ export function getOne(Model:ModelTripOrStation, popOptions = "") {
 		}
 
 
-		if (popOptions) query = query.populate(popOptions)
+		if (popOptions) query = query?.populate(popOptions)
 		const doc = await query
 
 		if (!doc) {
@@ -74,10 +75,9 @@ export function getOne(Model:ModelTripOrStation, popOptions = "") {
 	})
 }
 
-export function getAll(Model: ModelAll) {
+export function getAll(Model: Model<any>) {
 	return catchAsync(async (req, res, _next) => {
-		const filter = {}
-
+		let filter = {}
 		if (req.params.stationId) filter = { $or: [{departure_station_id: req.params.stationId}, { return_station_id: req.params.stationId}]}
 
 		const features = new APIFeatures(Model.find(filter), req.query)
@@ -85,21 +85,20 @@ export function getAll(Model: ModelAll) {
 			.sort()
 			.limitFields()
 			.paginate()
-		// const doc = await features.query.explain();
+
 		const doc = await features.query
 
 		res.status(200).json({
 			status: "success",
 			results: doc.length,
 			data: {
-				data: doc,
-				// stats: statsObject
+				data: doc
 			},
 		})
 	})
 }
 
-export function updateOne(Model: ModelAll) {
+export function updateOne(Model: Model<any>) {
 	return catchAsync(async (req, res, next) => {
 		const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
 			new: true,
@@ -119,7 +118,7 @@ export function updateOne(Model: ModelAll) {
 	})
 }
 
-export function createOne(Model: ModelAll) {
+export function createOne(Model: Model<any>) {
 	return catchAsync(async (req, res, _next) => {
 
 		const doc = await Model.create(req.body)
