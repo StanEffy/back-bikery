@@ -1,13 +1,13 @@
-import {getAllStationsStats, getStationStats} from '../controllers/stationsStatsController';
-import {Router} from "express";
+import {getAllStationsStats, getStationStats} from "../controllers/stationsStatsController"
+import {Router} from "express"
 
 const router = Router()
 
 router
-    .route('/')
-    .get(getAllStationsStats)
+	.route("/")
+	.get(getAllStationsStats)
 router
-    .route('/:id')
-    .get(getStationStats)
+	.route("/:id")
+	.get(getStationStats)
 
-export default router;
+export default router
