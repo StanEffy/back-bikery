@@ -1,11 +1,13 @@
+import {ITrip} from "../models/types"
+
 export enum stationType {
     "departure",
     "return"
 }
 
-const searchTopStations = (arrayOfTrips, mainStationType: stationType) => {
+const searchTopStations = (arrayOfTrips: ITrip[], mainStationType: stationType) => {
 	const res = {}
-	arrayOfTrips.forEach((trip) => {
+	arrayOfTrips.forEach((trip: ITrip) => {
 		switch (mainStationType) {
 		case stationType.departure:
 		{
