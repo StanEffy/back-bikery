@@ -23,7 +23,7 @@ export interface IStationStats {
     mean_duration: number,
     median_durarion: number,
     arrivals: number,
-    ID: number
+    ID?: string
 }
 export interface ITrip {
     departure: string,
@@ -42,5 +42,5 @@ export interface IStationToStation {
     station_id: string,
     stations_of_return: object
     stations_of_arrival: object
-    ID: string
+    ID?: string
 }

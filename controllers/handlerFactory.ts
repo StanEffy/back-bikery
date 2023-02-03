@@ -4,8 +4,9 @@ import APIFeatures from "../utils/apiFeatures"
 import {Model} from "mongoose"
 import {IStation, IStationStats, IStationToStation, ITrip} from "../models/types"
 
-type ModelTripOrStation = Model<IStation> | Model<ITrip>
-type ModelAll = Model<IStation> | Model<ITrip> | Model<IStationToStation> | Model<IStationStats>
+type ModelTripOrStation = Model<IStation> | Model<ITrip>;
+
+type TModelAll = Model<IStation> | Model<ITrip> | Model<IStationToStation> | Model<IStationStats>
 
 export function deleteOne(Model: ModelTripOrStation) {
 	return catchAsync(async (req, res, next) => {
@@ -74,7 +75,7 @@ export function getOne(Model:ModelTripOrStation, popOptions = "") {
 	})
 }
 
-export function getAll(Model: ModelAll) {
+export function getAll(Model: TModelAll) {
 	return catchAsync(async (req, res, _next) => {
 		const filter = {}
 
@@ -99,7 +100,7 @@ export function getAll(Model: ModelAll) {
 	})
 }
 
-export function updateOne(Model: ModelAll) {
+export function updateOne(Model: TModelAll) {
 	return catchAsync(async (req, res, next) => {
 		const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
 			new: true,
