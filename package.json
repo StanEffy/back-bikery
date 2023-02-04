@@ -7,7 +7,9 @@
     "start": "node server.ts",
     "start:prod": "NODE_ENV=production nodemon server.ts",
     "start:dev": "NODE_ENV=development nodemon server.ts",
-    "test": "jest"
+    "test": "jest",
+    "tsc": "tsc",
+    "start:build": "node build/server.js"
   },
   "author": "StanEfimov",
   "license": "ISC",
@@ -32,6 +34,6 @@
     "@typescript-eslint/eslint-plugin": "^5.50.0",
     "@typescript-eslint/parser": "^5.50.0",
     "eslint": "^8.33.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.5"
   }
 }
