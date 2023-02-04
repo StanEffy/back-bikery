@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c209b32f.css",
+    "main.js": "/static/js/main.d1989729.js",
+    "static/js/mapbox-gl-csp-worker.28e0a41f.worker.js": "/static/js/mapbox-gl-csp-worker.28e0a41f.worker.js",
+    "index.html": "/index.html",
+    "main.c209b32f.css.map": "/static/css/main.c209b32f.css.map",
+    "main.d1989729.js.map": "/static/js/main.d1989729.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c209b32f.css",
+    "static/js/main.d1989729.js"
+  ]
+}
