@@ -8,4 +8,6 @@ COPY ./package.json /package.json
 COPY ./package-lock.json /package-lock.json
 
 RUN NODE_ENV=$NODE_ENV npm install
+
+EXPOSE 3002
 CMD ["node", "build/server.js"]
